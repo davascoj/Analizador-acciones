@@ -24,7 +24,7 @@ jobs:
       - name: Instalar librerias
         run: |
           python -m pip install --upgrade pip
-          pip install pandas numpy openpyxl
+          pip install pandas numpy openpyxl yfinance
 
       - name: Ejecutar analizador
         run: python analizador_acciones.py
