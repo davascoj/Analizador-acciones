@@ -33,6 +33,15 @@ body {
   color: #b7c4e5;
 }
 
+.buttons,
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+  align-items: center;
+}
+
 button {
   border: none;
   padding: 12px 18px;
@@ -41,6 +50,21 @@ button {
   color: #03111d;
   font-weight: 700;
   cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.88;
+}
+
+.filtros button {
+  background: #1f2937;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+}
+
+.filtros label {
+  color: #dbeafe;
+  font-size: 14px;
 }
 
 .notice {
@@ -58,6 +82,7 @@ button {
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 16px 40px rgba(0,0,0,.35);
+  margin-bottom: 20px;
 }
 
 .topbar {
@@ -84,7 +109,7 @@ button {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 980px;
+  min-width: 1300px;
 }
 
 th, td {
@@ -112,31 +137,34 @@ td {
   font-size: 12px;
 }
 
-.bajo { background: #064e3b; color: #a7f3d0; }
-.medio { background: #78350f; color: #fde68a; }
-.alto { background: #7f1d1d; color: #fecaca; }
-
-.compra { color: #86efac; font-weight: 700; }
-.vigilar { color: #fde68a; font-weight: 700; }
-.no { color: #fca5a5; font-weight: 700; }
-.buttons,
-.filtros {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 14px;
-  align-items: center;
+.bajo {
+  background: #064e3b;
+  color: #a7f3d0;
 }
 
-.filtros button {
-  background: #1f2937;
-  color: #e5e7eb;
-  border: 1px solid #334155;
+.medio {
+  background: #78350f;
+  color: #fde68a;
 }
 
-.filtros label {
-  color: #dbeafe;
-  font-size: 14px;
+.alto {
+  background: #7f1d1d;
+  color: #fecaca;
+}
+
+.compra {
+  color: #86efac;
+  font-weight: 700;
+}
+
+.vigilar {
+  color: #fde68a;
+  font-weight: 700;
+}
+
+.no {
+  color: #fca5a5;
+  font-weight: 700;
 }
 
 .prob {
@@ -168,4 +196,36 @@ td {
 .mom-neg {
   color: #fca5a5;
   font-weight: 700;
+}
+
+.info-card {
+  margin-top: 20px;
+}
+
+.guia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 20px;
+}
+
+.guia-item {
+  background: #101a33;
+  border: 1px solid #22345f;
+  border-radius: 14px;
+  padding: 15px;
+}
+
+.guia-item strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #59c7ff;
+  font-size: 15px;
+}
+
+.guia-item p {
+  color: #d5dff7;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
 }
