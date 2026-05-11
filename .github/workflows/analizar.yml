@@ -1,0 +1,38 @@
+name: Analizar acciones
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 13 * * 1-5"
+
+permissions:
+  contents: write
+
+jobs:
+  analizar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar librerias
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy openpyxl
+
+      - name: Ejecutar analizador
+        run: python analizador_acciones.py
+
+      - name: Guardar resultados en el repositorio
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add datos_acciones.json analisis_acciones.xlsx
+          git commit -m "Actualizar analisis de acciones" || echo "Sin cambios"
+          git push
