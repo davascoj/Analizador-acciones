@@ -32,6 +32,22 @@ function filtrarSector(sector) {
   renderTabla();
 }
 
+function limpiarBusqueda() {
+  const buscar = document.getElementById("buscarAccion");
+  if (buscar) buscar.value = "";
+
+  datosGlobales = [...datosOriginales];
+  sectorActivo = "TODOS";
+
+  const soloCompra = document.getElementById("soloCompra");
+  const soloHot = document.getElementById("soloHot");
+
+  if (soloCompra) soloCompra.checked = false;
+  if (soloHot) soloHot.checked = false;
+
+  renderTabla();
+}
+
 function claseProbabilidad(prob) {
   if (prob >= 80) return "prob-verde";
   if (prob >= 65) return "prob-amarillo";
@@ -70,9 +86,11 @@ function mostrarTop4() {
   datosGlobales = datos.slice(0, 4);
   sectorActivo = "TODOS";
 
+  const buscar = document.getElementById("buscarAccion");
   const soloCompra = document.getElementById("soloCompra");
   const soloHot = document.getElementById("soloHot");
 
+  if (buscar) buscar.value = "";
   if (soloCompra) soloCompra.checked = false;
   if (soloHot) soloHot.checked = false;
 
@@ -83,11 +101,18 @@ function renderTabla() {
   const tabla = document.getElementById("tabla");
   const soloCompra = document.getElementById("soloCompra")?.checked || false;
   const soloHot = document.getElementById("soloHot")?.checked || false;
+  const busqueda = document.getElementById("buscarAccion")?.value.trim().toUpperCase() || "";
 
   let datos = [...datosGlobales];
 
   if (sectorActivo !== "TODOS") {
     datos = datos.filter(r => String(r.Sector || "").includes(sectorActivo));
+  }
+
+  if (busqueda !== "") {
+    datos = datos.filter(r =>
+      String(r.Accion || "").toUpperCase().includes(busqueda)
+    );
   }
 
   if (soloCompra) {
