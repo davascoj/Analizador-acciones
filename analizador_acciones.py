@@ -37,6 +37,14 @@ def rsi_real(close, periodo=14):
     rs = gain / loss
     return 100 - (100 / (1 + rs))
 
+def calcular_atr(high, low, close, periodo=14):
+    cierre_anterior = close.shift(1)
+    tr1 = high - low
+    tr2 = (high - cierre_anterior).abs()
+    tr3 = (low - cierre_anterior).abs()
+    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+    return tr.rolling(periodo).mean()
+
 def analizar(ticker):
     try:
         df = yf.download(
@@ -56,6 +64,7 @@ def analizar(ticker):
 
         close = df["Close"]
         high = df["High"]
+        low = df["Low"]
         volume = df["Volume"]
 
         precio = numero(close.iloc[-1])
@@ -68,6 +77,9 @@ def analizar(ticker):
         volumen_prom = numero(volume.rolling(20).mean().iloc[-1])
         max20 = numero(high.rolling(20).max().iloc[-1])
 
+        atr = numero(calcular_atr(high, low, close).iloc[-1])
+        atr_pct = (atr / precio) * 100 if precio and atr else 0
+
         ema12 = close.ewm(span=12, adjust=False).mean()
         ema26 = close.ewm(span=26, adjust=False).mean()
         macd = ema12 - ema26
@@ -76,7 +88,7 @@ def analizar(ticker):
         macd_val = numero(macd.iloc[-1])
         macd_sig = numero(macd_signal.iloc[-1])
 
-        if None in [precio, precio_5d, ma20, ma50, ma200, rsi, volumen_actual, volumen_prom, max20, macd_val, macd_sig]:
+        if None in [precio, precio_5d, ma20, ma50, ma200, rsi, volumen_actual, volumen_prom, max20, macd_val, macd_sig, atr]:
             return None
 
         momentum = ((precio / precio_5d) - 1) * 100
@@ -90,6 +102,7 @@ def analizar(ticker):
             score += 10
         if ma50 > ma200:
             score += 10
+
         if 50 <= rsi <= 68:
             score += 12
         elif 68 < rsi <= 75:
@@ -115,12 +128,19 @@ def analizar(ticker):
         if precio >= max20 * 0.98:
             score += 8
 
+        if atr_pct > 8:
+            score -= 8
+        elif atr_pct > 5:
+            score -= 4
+        elif 2 <= atr_pct <= 5:
+            score += 4
+
         score = max(0, min(95, score))
 
         riesgo = "BAJO"
-        if rsi > 75 or momentum > 12:
+        if rsi > 75 or momentum > 12 or atr_pct > 8:
             riesgo = "ALTO"
-        elif rsi > 68 or momentum > 6:
+        elif rsi > 68 or momentum > 6 or atr_pct > 5:
             riesgo = "MEDIO"
 
         hot_score = 0
@@ -142,10 +162,10 @@ def analizar(ticker):
         else:
             hot = ""
 
-        entrada_min = round(precio * 0.985, 2)
-        entrada_max = round(precio * 1.01, 2)
-        stop = round(precio * 0.95, 2)
-        objetivo = round(precio * 1.08, 2)
+        entrada_min = round(precio - (atr * 0.40), 2)
+        entrada_max = round(precio + (atr * 0.25), 2)
+        stop = round(precio - (atr * 1.5), 2)
+        objetivo = round(precio + (atr * 2.5), 2)
 
         if score >= 75 and riesgo != "ALTO":
             senal = "POSIBLE COMPRA"
@@ -161,6 +181,8 @@ def analizar(ticker):
             "Probabilidad tecnica": round(score, 1),
             "Momentum": round(momentum, 2),
             "Volumen relativo": round(volumen_relativo, 2),
+            "ATR": round(atr, 2),
+            "ATR %": round(atr_pct, 2),
             "Entrada min": entrada_min,
             "Entrada max": entrada_max,
             "Stop loss": stop,
