@@ -2,7 +2,7 @@ async function cargarDatos() {
   const tabla = document.getElementById("tabla");
   const fecha = document.getElementById("fecha");
 
-  tabla.innerHTML = `<tr><td colspan="9">Cargando datos...</td></tr>`;
+  tabla.innerHTML = `<tr><td colspan="10">Cargando datos...</td></tr>`;
 
   try {
     const resp = await fetch("datos_acciones.json?nocache=" + Date.now());
@@ -14,23 +14,30 @@ async function cargarDatos() {
     tabla.innerHTML = "";
 
     if (!data.resultados || data.resultados.length === 0) {
-      tabla.innerHTML = `<tr><td colspan="9">No hay resultados todavía. Presiona "Ejecutar análisis en GitHub".</td></tr>`;
+      tabla.innerHTML = `<tr><td colspan="10">No hay resultados todavía. Presiona "Ejecutar análisis en GitHub".</td></tr>`;
       return;
     }
 
     data.resultados.forEach(r => {
       const riesgo = String(r.Riesgo || "").toLowerCase();
       const senal = String(r.Senal || "");
-      let claseSenal = "no";
+      const prob = Number(r["Probabilidad tecnica"] || 0);
 
+      let claseSenal = "no";
       if (senal.includes("POSIBLE")) claseSenal = "compra";
       else if (senal.includes("VIGILAR")) claseSenal = "vigilar";
 
+      let hot = "";
+      if (prob >= 80 && String(r.Riesgo || "") !== "ALTO") {
+        hot = " 🔥";
+      }
+
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td><strong>${r.Accion}</strong></td>
+        <td><strong>${r.Accion}${hot}</strong></td>
+        <td>${r.Sector || "Otro"}</td>
         <td>${r["Precio actual"]}</td>
-        <td>${r["Probabilidad tecnica"]}%</td>
+        <td>${prob}%</td>
         <td>${r["Entrada min"]} - ${r["Entrada max"]}</td>
         <td>${r["Stop loss"]}</td>
         <td>${r.Objetivo}</td>
@@ -44,12 +51,13 @@ async function cargarDatos() {
 
   } catch (e) {
     fecha.textContent = "Sin datos";
-    tabla.innerHTML = `<tr><td colspan="9">No se pudieron cargar datos. Presiona "Ejecutar análisis en GitHub".</td></tr>`;
+    tabla.innerHTML = `<tr><td colspan="10">No se pudieron cargar datos. Presiona "Ejecutar análisis en GitHub".</td></tr>`;
   }
 }
 
 async function ejecutarAnalisis() {
   const token = prompt("Pega tu token de GitHub:");
+
   if (!token) {
     alert("No pegaste el token.");
     return;
