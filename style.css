@@ -229,3 +229,16 @@ td {
   line-height: 1.5;
   margin: 0;
 }
+#buscarAccion {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #e5e7eb;
+  min-width: 260px;
+  font-weight: 600;
+}
+
+#buscarAccion::placeholder {
+  color: #94a3b8;
+}
