@@ -30,6 +30,15 @@
         <button onclick="filtrarSector('Trading')">Trading</button>
         <button onclick="filtrarSector('Energía')">Energía</button>
 
+        <input
+          type="text"
+          id="buscarAccion"
+          placeholder="Buscar acción: NVDA, AMD, TSLA..."
+          oninput="renderTabla()"
+        />
+
+        <button onclick="limpiarBusqueda()">Quitar filtro</button>
+
         <label>
           <input type="checkbox" id="soloCompra" onchange="renderTabla()">
           Solo compra
@@ -48,74 +57,6 @@
       confirma volumen antes de entrar y no arriesgues dinero que no puedas perder.
     </section>
 
-    <section class="card info-card">
-      <div class="topbar">
-        <h2>📘 Guía rápida del analizador</h2>
-      </div>
-
-      <div class="guia">
-        <div class="guia-item">
-          <strong>PROB.</strong>
-          <p>Probabilidad técnica estimada. Verde = fuerte, amarillo = moderado, rojo = débil.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>MOMENTUM</strong>
-          <p>Movimiento reciente del precio. Positivo indica fuerza compradora; negativo indica debilidad.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>HOT</strong>
-          <p>Más 🔥 significa más fuerza técnica por probabilidad, volumen, momentum y riesgo controlado.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>ATR</strong>
-          <p>Promedio de movimiento diario de la acción. Sirve para calcular stops y objetivos más reales.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>ATR %</strong>
-          <p>Volatilidad relativa. Alto ATR % significa más movimiento y también más riesgo.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>ENTRADA</strong>
-          <p>Zona técnica sugerida para intentar entrar, calculada usando ATR.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>STOP</strong>
-          <p>Precio sugerido para limitar pérdidas si la operación sale mal.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>OBJETIVO</strong>
-          <p>Precio objetivo técnico estimado usando volatilidad reciente.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>RSI</strong>
-          <p>Indicador de fuerza. Cerca o arriba de 70 puede indicar sobrecompra.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>RIESGO</strong>
-          <p>Bajo, medio o alto según volatilidad, momentum y RSI. Riesgo alto no significa mala acción, pero sí más peligro.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>SEÑAL</strong>
-          <p>Lectura automática: Posible compra, vigilar o no comprar.</p>
-        </div>
-
-        <div class="guia-item">
-          <strong>TOP 4</strong>
-          <p>Muestra las 4 mejores opciones técnicas filtrando compra, riesgo bajo/medio, hot score, momentum y ATR.</p>
-        </div>
-      </div>
-    </section>
-
     <section class="card">
       <div class="topbar">
         <h2>Resultados</h2>
@@ -126,20 +67,20 @@
         <table>
           <thead>
             <tr>
-              <th>Acción</th>
-              <th>Sector</th>
-              <th>Precio</th>
-              <th>Prob.</th>
-              <th>Momentum</th>
-              <th>Hot</th>
-              <th>ATR</th>
-              <th>ATR %</th>
-              <th>Entrada</th>
-              <th>Stop</th>
-              <th>Objetivo</th>
-              <th>RSI</th>
-              <th>Riesgo</th>
-              <th>Señal</th>
+              <th title="Ticker o símbolo bursátil de la acción. Ejemplo: NVDA, AMD, TSLA.">Acción</th>
+              <th title="Sector o categoría principal de la empresa. Sirve para identificar qué industria está fuerte.">Sector</th>
+              <th title="Último precio de cierre tomado por el sistema.">Precio</th>
+              <th title="Probabilidad técnica estimada. Verde = fuerte, amarillo = moderado, rojo = débil. No garantiza ganancia.">Prob.</th>
+              <th title="Movimiento reciente del precio en porcentaje. Positivo indica fuerza compradora; negativo indica debilidad.">Momentum</th>
+              <th title="Más fuego significa mayor fuerza técnica por probabilidad, volumen, momentum y riesgo controlado.">Hot</th>
+              <th title="ATR: promedio de movimiento diario de la acción. Ayuda a calcular stop y objetivo realistas.">ATR</th>
+              <th title="ATR como porcentaje del precio. Alto ATR % significa más movimiento y también más riesgo.">ATR %</th>
+              <th title="Zona técnica sugerida para intentar entrar, calculada usando ATR.">Entrada</th>
+              <th title="Precio sugerido para limitar pérdidas si la operación sale mal.">Stop</th>
+              <th title="Precio objetivo técnico estimado usando volatilidad reciente.">Objetivo</th>
+              <th title="RSI: indicador de fuerza. Cerca o arriba de 70 puede indicar sobrecompra.">RSI</th>
+              <th title="Riesgo bajo, medio o alto según volatilidad, momentum y RSI. Riesgo alto no significa mala acción, pero sí más peligro.">Riesgo</th>
+              <th title="Lectura automática: Posible compra, vigilar o no comprar.">Señal</th>
             </tr>
           </thead>
 
