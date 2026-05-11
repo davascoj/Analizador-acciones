@@ -6,17 +6,27 @@
   <title>Analizador de Acciones ARQ</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
+
 <body>
   <main class="container">
+
     <section class="hero">
       <h1>Analizador de Acciones ARQ</h1>
-      <p>Ranking técnico con probabilidad estimada, zona de entrada, stop loss y objetivo.</p>
-      <button onclick="cargarDatos()">Actualizar vista</button>
-      <button onclick="ejecutarAnalisis()">Ejecutar análisis en GitHub</button>
+      <p>
+        Ranking técnico con probabilidad estimada, sector, zona de entrada,
+        stop loss, objetivo y señal de riesgo.
+      </p>
+
+      <div class="buttons">
+        <button onclick="cargarDatos()">Actualizar vista</button>
+        <button onclick="ejecutarAnalisis()">Ejecutar análisis en GitHub</button>
+      </div>
     </section>
 
     <section class="notice">
-      <strong>Importante:</strong> La probabilidad es técnica, no garantiza ganancias. Usa stop loss y confirma volumen antes de entrar.
+      <strong>Importante:</strong>
+      La probabilidad es técnica, no garantiza ganancias. Usa stop loss,
+      confirma volumen antes de entrar y no arriesgues dinero que no puedas perder.
     </section>
 
     <section class="card">
@@ -30,6 +40,7 @@
           <thead>
             <tr>
               <th>Acción</th>
+              <th>Sector</th>
               <th>Precio</th>
               <th>Prob.</th>
               <th>Entrada</th>
@@ -40,10 +51,12 @@
               <th>Señal</th>
             </tr>
           </thead>
+
           <tbody id="tabla"></tbody>
         </table>
       </div>
     </section>
+
   </main>
 
   <script src="script.js"></script>
