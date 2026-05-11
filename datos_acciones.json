@@ -1,4 +1,125 @@
 {
-  "actualizado": "2026-05-11 14:40 UTC",
-  "resultados": []
+  "actualizado": "2026-05-11 14:50 UTC",
+  "resultados": [
+    {
+      "Accion": "NVDA",
+      "Precio actual": 220.42,
+      "Probabilidad tecnica": 85,
+      "Entrada min": 217.11,
+      "Entrada max": 222.62,
+      "Stop loss": 209.4,
+      "Objetivo": 238.05,
+      "RSI": 2.23,
+      "Riesgo": "MEDIO",
+      "Senal": "POSIBLE COMPRA"
+    },
+    {
+      "Accion": "AMD",
+      "Precio actual": 458.83,
+      "Probabilidad tecnica": 85,
+      "Entrada min": 451.95,
+      "Entrada max": 463.42,
+      "Stop loss": 435.89,
+      "Objetivo": 495.54,
+      "RSI": 4.36,
+      "Riesgo": "ALTO",
+      "Senal": "POSIBLE COMPRA"
+    },
+    {
+      "Accion": "AVGO",
+      "Precio actual": 429.86,
+      "Probabilidad tecnica": 85,
+      "Entrada min": 423.41,
+      "Entrada max": 434.16,
+      "Stop loss": 408.37,
+      "Objetivo": 464.25,
+      "RSI": 2.88,
+      "Riesgo": "MEDIO",
+      "Senal": "POSIBLE COMPRA"
+    },
+    {
+      "Accion": "AAPL",
+      "Precio actual": 292.67,
+      "Probabilidad tecnica": 85,
+      "Entrada min": 288.28,
+      "Entrada max": 295.6,
+      "Stop loss": 278.04,
+      "Objetivo": 316.08,
+      "RSI": 1.41,
+      "Riesgo": "BAJO",
+      "Senal": "POSIBLE COMPRA"
+    },
+    {
+      "Accion": "TSLA",
+      "Precio actual": 421.45,
+      "Probabilidad tecnica": 85,
+      "Entrada min": 415.13,
+      "Entrada max": 425.66,
+      "Stop loss": 400.38,
+      "Objetivo": 455.17,
+      "RSI": 2.47,
+      "Riesgo": "MEDIO",
+      "Senal": "POSIBLE COMPRA"
+    },
+    {
+      "Accion": "GOOGL",
+      "Precio actual": 394.42,
+      "Probabilidad tecnica": 85,
+      "Entrada min": 388.5,
+      "Entrada max": 398.36,
+      "Stop loss": 374.69,
+      "Objetivo": 425.97,
+      "RSI": 1.93,
+      "Riesgo": "BAJO",
+      "Senal": "POSIBLE COMPRA"
+    },
+    {
+      "Accion": "AMZN",
+      "Precio actual": 271.16,
+      "Probabilidad tecnica": 75,
+      "Entrada min": 267.09,
+      "Entrada max": 273.87,
+      "Stop loss": 257.6,
+      "Objetivo": 292.85,
+      "RSI": 1.84,
+      "Riesgo": "BAJO",
+      "Senal": "POSIBLE COMPRA"
+    },
+    {
+      "Accion": "MSFT",
+      "Precio actual": 409.38,
+      "Probabilidad tecnica": 65,
+      "Entrada min": 403.23,
+      "Entrada max": 413.47,
+      "Stop loss": 388.91,
+      "Objetivo": 442.13,
+      "RSI": 1.85,
+      "Riesgo": "BAJO",
+      "Senal": "VIGILAR"
+    },
+    {
+      "Accion": "META",
+      "Precio actual": 600.84,
+      "Probabilidad tecnica": 65,
+      "Entrada min": 591.83,
+      "Entrada max": 606.85,
+      "Stop loss": 570.8,
+      "Objetivo": 648.91,
+      "RSI": 2.36,
+      "Riesgo": "MEDIO",
+      "Senal": "VIGILAR"
+    },
+    {
+      "Accion": "PLTR",
+      "Precio actual": 134.79,
+      "Probabilidad tecnica": 50,
+      "Entrada min": 132.76,
+      "Entrada max": 136.13,
+      "Stop loss": 128.05,
+      "Objetivo": 145.57,
+      "RSI": 3.26,
+      "Riesgo": "MEDIO",
+      "Senal": "NO COMPRAR"
+    }
+  ]
 }
