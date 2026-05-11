@@ -1,6 +1,7 @@
 import yfinance as yf
 import pandas as pd
-from datetime import datetime, timezone
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import json
 import time
 
@@ -55,7 +56,6 @@ def analizar(ticker):
 
         close = df["Close"]
         high = df["High"]
-        low = df["Low"]
         volume = df["Volume"]
 
         precio = numero(close.iloc[-1])
@@ -63,7 +63,6 @@ def analizar(ticker):
         ma20 = numero(close.rolling(20).mean().iloc[-1])
         ma50 = numero(close.rolling(50).mean().iloc[-1])
         ma200 = numero(close.rolling(200).mean().iloc[-1])
-
         rsi = numero(rsi_real(close).iloc[-1])
         volumen_actual = numero(volume.iloc[-1])
         volumen_prom = numero(volume.rolling(20).mean().iloc[-1])
@@ -77,7 +76,7 @@ def analizar(ticker):
         macd_val = numero(macd.iloc[-1])
         macd_sig = numero(macd_signal.iloc[-1])
 
-        if None in [precio, precio_5d, ma20, ma50, ma200, rsi, volumen_actual, volumen_prom, max20]:
+        if None in [precio, precio_5d, ma20, ma50, ma200, rsi, volumen_actual, volumen_prom, max20, macd_val, macd_sig]:
             return None
 
         momentum = ((precio / precio_5d) - 1) * 100
@@ -203,7 +202,9 @@ def main():
     )
 
     salida = {
-        "actualizado": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+        "actualizado": datetime.now(
+            ZoneInfo("America/Bogota")
+        ).strftime("%d-%m-%Y %I:%M %p Colombia"),
         "resultados": resultados
     }
 
