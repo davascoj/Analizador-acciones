@@ -4,10 +4,52 @@ from datetime import datetime, timezone
 import json
 import time
 
-ACCIONES = [
-    "NVDA", "AMD", "MSFT", "AVGO", "AAPL",
-    "META", "AMZN", "TSLA", "GOOGL", "PLTR"
-]
+ACCIONES_INFO = {
+    "NVDA": "IA / Chips",
+    "AMD": "IA / Chips",
+    "MSFT": "Tecnología",
+    "AVGO": "IA / Chips",
+    "AAPL": "Tecnología",
+    "META": "Tecnología",
+    "AMZN": "Tecnología",
+    "GOOGL": "Tecnología",
+    "TSLA": "Autos / Tech",
+    "PLTR": "IA / Software",
+    "SMCI": "Servidores IA",
+    "MU": "Memoria / Chips",
+    "ARM": "Chips",
+
+    "QCOM": "Chips",
+    "INTC": "Chips",
+    "TSM": "Chips",
+    "ASML": "Chips",
+    "AMAT": "Equipos chips",
+    "LRCX": "Equipos chips",
+    "KLAC": "Equipos chips",
+
+    "SOFI": "Fintech",
+    "COIN": "Cripto / Trading",
+    "HOOD": "Trading",
+    "PYPL": "Pagos",
+    "SQ": "Pagos",
+
+    "XOM": "Energía",
+    "CVX": "Energía",
+    "OXY": "Energía",
+    "SLB": "Energía",
+
+    "SPY": "ETF Mercado",
+    "QQQ": "ETF Nasdaq",
+    "SOXX": "ETF Chips",
+
+    "RKLB": "Espacial",
+    "IONQ": "Computación cuántica",
+    "SOUN": "IA",
+    "AI": "IA",
+    "UPST": "Fintech IA"
+}
+
+ACCIONES = list(ACCIONES_INFO.keys())
 
 def numero(valor):
     try:
@@ -79,6 +121,7 @@ def analizar(ticker):
 
         return {
             "Accion": ticker,
+            "Sector": ACCIONES_INFO.get(ticker, "Otro"),
             "Precio actual": round(precio, 2),
             "Probabilidad tecnica": round(score, 1),
             "Entrada min": entrada_min,
