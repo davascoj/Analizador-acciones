@@ -5,7 +5,7 @@ async function cargarDatos() {
   const tabla = document.getElementById("tabla");
   const fecha = document.getElementById("fecha");
 
-  tabla.innerHTML = `<tr><td colspan="12">Cargando datos...</td></tr>`;
+  tabla.innerHTML = `<tr><td colspan="14">Cargando datos...</td></tr>`;
 
   try {
     const resp = await fetch("datos_acciones.json?nocache=" + Date.now());
