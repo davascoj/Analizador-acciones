@@ -10,13 +10,14 @@ body {
 }
 
 .container {
-  width: min(1200px, 94%);
+  width: 98%;
+  max-width: 1800px;
   margin: 0 auto;
-  padding: 28px 0;
+  padding: 20px 0;
 }
 
 .hero {
-  padding: 28px;
+  padding: 24px;
   background: linear-gradient(135deg, #14213d, #0f172a);
   border: 1px solid #22304d;
   border-radius: 18px;
@@ -44,7 +45,7 @@ body {
 
 button {
   border: none;
-  padding: 12px 18px;
+  padding: 10px 15px;
   border-radius: 12px;
   background: #38bdf8;
   color: #03111d;
@@ -67,6 +68,20 @@ button:hover {
   font-size: 14px;
 }
 
+#buscarAccion {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #e5e7eb;
+  min-width: 260px;
+  font-weight: 600;
+}
+
+#buscarAccion::placeholder {
+  color: #94a3b8;
+}
+
 .notice {
   margin: 18px 0;
   padding: 14px 16px;
@@ -80,7 +95,7 @@ button:hover {
   background: #111827;
   border: 1px solid #22304d;
   border-radius: 18px;
-  overflow: hidden;
+  overflow-x: visible;
   box-shadow: 0 16px 40px rgba(0,0,0,.35);
   margin-bottom: 20px;
 }
@@ -89,7 +104,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px;
+  padding: 16px;
   gap: 12px;
   flex-wrap: wrap;
 }
@@ -103,27 +118,29 @@ button:hover {
 }
 
 .table-wrap {
-  overflow-x: auto;
+  overflow-x: visible;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 1300px;
+  min-width: 0;
+  table-layout: auto;
 }
 
 th, td {
-  padding: 14px 12px;
+  padding: 9px 8px;
   border-top: 1px solid #263247;
   text-align: left;
   white-space: nowrap;
+  font-size: 13px;
 }
 
 th {
   color: #93c5fd;
-  font-size: 13px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: .05em;
+  letter-spacing: .04em;
 }
 
 td {
@@ -131,10 +148,10 @@ td {
 }
 
 .badge {
-  padding: 6px 10px;
+  padding: 5px 8px;
   border-radius: 999px;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .bajo {
@@ -168,7 +185,7 @@ td {
 }
 
 .prob {
-  padding: 6px 10px;
+  padding: 5px 8px;
   border-radius: 999px;
   font-weight: 800;
 }
@@ -229,16 +246,31 @@ td {
   line-height: 1.5;
   margin: 0;
 }
-#buscarAccion {
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: #e5e7eb;
-  min-width: 260px;
-  font-weight: 600;
-}
 
-#buscarAccion::placeholder {
-  color: #94a3b8;
+@media (max-width: 900px) {
+  .container {
+    width: 98%;
+  }
+
+  .hero {
+    padding: 18px;
+  }
+
+  th, td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+
+  th {
+    font-size: 10px;
+  }
+
+  button {
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  #buscarAccion {
+    min-width: 200px;
+  }
 }
