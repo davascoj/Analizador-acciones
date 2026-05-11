@@ -1,4 +1,5 @@
 let datosGlobales = [];
+let datosOriginales = [];
 let sectorActivo = "TODOS";
 
 async function cargarDatos() {
@@ -15,6 +16,8 @@ async function cargarDatos() {
     fecha.textContent = "Última actualización: " + (data.actualizado || "sin fecha");
 
     datosGlobales = data.resultados || [];
+    datosOriginales = data.resultados || [];
+
     renderTabla();
 
   } catch (e) {
@@ -24,6 +27,7 @@ async function cargarDatos() {
 }
 
 function filtrarSector(sector) {
+  datosGlobales = [...datosOriginales];
   sectorActivo = sector;
   renderTabla();
 }
@@ -32,6 +36,47 @@ function claseProbabilidad(prob) {
   if (prob >= 80) return "prob-verde";
   if (prob >= 65) return "prob-amarillo";
   return "prob-rojo";
+}
+
+function mostrarTop4() {
+  let datos = [...datosOriginales];
+
+  datos = datos.filter(r =>
+    String(r.Senal || "").includes("POSIBLE") &&
+    ["BAJO", "MEDIO"].includes(r.Riesgo)
+  );
+
+  datos.sort((a, b) => {
+    const aHot = String(a["Hot Score"] || "").length;
+    const bHot = String(b["Hot Score"] || "").length;
+
+    const aProb = Number(a["Probabilidad tecnica"] || 0);
+    const bProb = Number(b["Probabilidad tecnica"] || 0);
+
+    const aMomentum = Number(a.Momentum || 0);
+    const bMomentum = Number(b.Momentum || 0);
+
+    const aAtr = Number(a["ATR %"] || 0);
+    const bAtr = Number(b["ATR %"] || 0);
+
+    return (
+      (bHot - aHot) ||
+      (bProb - aProb) ||
+      (bMomentum - aMomentum) ||
+      (aAtr - bAtr)
+    );
+  });
+
+  datosGlobales = datos.slice(0, 4);
+  sectorActivo = "TODOS";
+
+  const soloCompra = document.getElementById("soloCompra");
+  const soloHot = document.getElementById("soloHot");
+
+  if (soloCompra) soloCompra.checked = false;
+  if (soloHot) soloHot.checked = false;
+
+  renderTabla();
 }
 
 function renderTabla() {
