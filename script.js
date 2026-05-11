@@ -19,7 +19,7 @@ async function cargarDatos() {
 
   } catch (e) {
     fecha.textContent = "Sin datos";
-    tabla.innerHTML = `<tr><td colspan="12">No se pudieron cargar datos. Presiona "Ejecutar análisis en GitHub".</td></tr>`;
+    tabla.innerHTML = `<tr><td colspan="14">No se pudieron cargar datos. Presiona "Ejecutar análisis en GitHub".</td></tr>`;
   }
 }
 
@@ -66,13 +66,22 @@ function renderTabla() {
     const aProb = Number(a["Probabilidad tecnica"] || 0);
     const bProb = Number(b["Probabilidad tecnica"] || 0);
 
-    return (bCompra - aCompra) || (bRiesgo - aRiesgo) || (bHot - aHot) || (bProb - aProb);
+    const aMomentum = Number(a.Momentum || 0);
+    const bMomentum = Number(b.Momentum || 0);
+
+    return (
+      (bCompra - aCompra) ||
+      (bRiesgo - aRiesgo) ||
+      (bHot - aHot) ||
+      (bProb - aProb) ||
+      (bMomentum - aMomentum)
+    );
   });
 
   tabla.innerHTML = "";
 
   if (datos.length === 0) {
-    tabla.innerHTML = `<tr><td colspan="12">No hay resultados con esos filtros.</td></tr>`;
+    tabla.innerHTML = `<tr><td colspan="14">No hay resultados con esos filtros.</td></tr>`;
     return;
   }
 
@@ -96,6 +105,8 @@ function renderTabla() {
       <td><span class="prob ${claseProbabilidad(prob)}">${prob}%</span></td>
       <td class="${claseMom}">${momentum}%</td>
       <td>${r["Hot Score"] || ""}</td>
+      <td>${r.ATR || 0}</td>
+      <td>${r["ATR %"] || 0}%</td>
       <td>${r["Entrada min"]} - ${r["Entrada max"]}</td>
       <td>${r["Stop loss"]}</td>
       <td>${r.Objetivo}</td>
