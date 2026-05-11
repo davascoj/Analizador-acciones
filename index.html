@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analizador de Acciones ARQ</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <h1>Analizador de Acciones ARQ</h1>
+      <p>Ranking técnico con probabilidad estimada, zona de entrada, stop loss y objetivo.</p>
+      <button onclick="cargarDatos()">Actualizar vista</button>
+    </section>
+
+    <section class="notice">
+      <strong>Importante:</strong> La probabilidad es técnica, no garantiza ganancias. Usa stop loss y confirma volumen antes de entrar.
+    </section>
+
+    <section class="card">
+      <div class="topbar">
+        <h2>Resultados</h2>
+        <span id="fecha">Cargando...</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Acción</th>
+              <th>Precio</th>
+              <th>Prob.</th>
+              <th>Entrada</th>
+              <th>Stop</th>
+              <th>Objetivo</th>
+              <th>RSI</th>
+              <th>Riesgo</th>
+              <th>Señal</th>
+            </tr>
+          </thead>
+          <tbody id="tabla"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
